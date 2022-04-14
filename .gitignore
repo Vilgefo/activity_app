@@ -1,0 +1,14 @@
+activity/storage/*.key
+activity/vendor
+activity/.env
+activity/.env.backup
+activity/.phpunit.result.cache
+activity/npm-debug.log
+activity/yarn-error.log
+activity/.phpstorm.meta.php
+activity/_ide_helper.php
+activity/storage/mysql
+/.idea
+/mysql
+activity/mysql
+activity/.idea
