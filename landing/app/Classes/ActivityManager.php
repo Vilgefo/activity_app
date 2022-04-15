@@ -17,7 +17,7 @@ class ActivityManager {
     public function save(string $url): array{
         return $this->client->send('save', ['route'=>$url, 'ip'=>Helpers::getRealIp()]);
     }
-    public function show(): array{
-        return $this->client->send('show');
+    public function show(int $offset = 0, ?int $limit = null): array{
+        return $this->client->send('show', ['offset' => $offset, 'limit'=>$limit]);
     }
 }

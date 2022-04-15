@@ -15,4 +15,11 @@ class Helpers
             ?? $_SERVER['REMOTE_ADDR']
             ?? '0.0.0.0';
     }
+    public static function uriWithoutGet(){
+        $url = $_SERVER['REQUEST_URI'];
+        $url = explode('?', $url);
+        $url = $url[0];
+
+        return $url;
+    }
 }

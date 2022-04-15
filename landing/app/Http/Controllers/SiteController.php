@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ActivityManager;
-use ClientApp\Services\JsonRpcClient;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Routing\Controller as BaseController;
-use App\Helpers\Helpers;
+use Illuminate\Http\Request;
 
 class SiteController extends BaseController
 {
@@ -16,9 +16,12 @@ class SiteController extends BaseController
         $this->activityManager = $activityManager;
     }
 
-    public function show(\Request $request)
+    public function show(Request $request)
     {
-        $data = $this->activityManager->show();
-        return $data;
+        $limit = 5;
+        $page = $request->page ?? 1;
+        $routes = $this->activityManager->show($page-1 * $limit, $limit);
+        $paginator = new LengthAwarePaginator(array_slice($routes, ($page-1) * $limit, $limit), count(array_chunk($routes, $limit)), 1, $request->page ?? 1);
+        return view('view', ['routes'=>$paginator]);
     }
 }

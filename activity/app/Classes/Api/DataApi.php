@@ -11,7 +11,7 @@ class DataApi
             'ip' => $ip
         ]);
     }
-    public function show(){
+    public function show($offset = 0, $limit = null){
         return RoutesHistory::selectRaw('route, ip, COUNT(route) as count, MAX(created_at) as last_ts')->groupBy(['route', 'ip'])->get()->toArray();
     }
 }
