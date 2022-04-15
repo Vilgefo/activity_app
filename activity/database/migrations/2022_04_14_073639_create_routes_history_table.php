@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('route');
             $table->string('ip');
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
     }
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('', function(){
-    return 'sorry this is only api app';
+    return 'sorry this is only Api app';
 });
 
 

@@ -12,3 +12,16 @@ activity/storage/mysql
 /mysql
 activity/mysql
 activity/.idea
+landing/storage/*.key
+landing/vendor
+landing/.env
+landing/.env.backup
+landing/.phpunit.result.cache
+landing/npm-debug.log
+landing/yarn-error.log
+landing/.phpstorm.meta.php
+landing/_ide_helper.php
+landing/storage/mysql
+landing/mysql
+landing/.idea
+..gitignore.kate-swp
