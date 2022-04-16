@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\ActivityManager;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Http\Requests\RouteRequest;
+use App\Services\Activity\ActivityManager;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Http\Request;
 
 class SiteController extends BaseController
 {
@@ -16,12 +15,9 @@ class SiteController extends BaseController
         $this->activityManager = $activityManager;
     }
 
-    public function show(Request $request)
+    public function show(RouteRequest $request)
     {
-        $limit = 5;
-        $page = $request->page ?? 1;
-        $routes = $this->activityManager->show($page-1 * $limit, $limit);
-        $paginator = new LengthAwarePaginator(array_slice($routes, ($page-1) * $limit, $limit), count(array_chunk($routes, $limit)), 1, $request->page ?? 1);
-        return view('view', ['routes'=>$paginator]);
+        $request->validated();
+        return view('view', ['routes'=>$this->activityManager->getRoutesPaginator(5, $request->page ?? 1)]);
     }
 }

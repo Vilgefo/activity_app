@@ -14,16 +14,28 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 # 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
 RUN a2enmod rewrite headers
+RUN apt-get update && \
+    apt-get install -yq tzdata && \
+    ln -fs /usr/share/zoneinfo/Europe/Moscow /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
 
+ENV TZ="Europe/Moscow"
+RUN ln -snf /usr/share/zoneinfo/$tz /etc/localtime && echo $tz > /etc/timezone
 RUN apt-get install -y nodejs
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN apt-get install zip
-USER www
-COPY --chown=www:www ./ /var/www/
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --chown=www:www ./ /usr/src/cache
 
+WORKDIR /usr/src/cache
+USER www
+RUN composer install
+RUN npm install
 
-
-
-
+USER root
+RUN chown -R www:www ./
+WORKDIR /var/www
+RUN chown -R www:www ./
+CMD chmod ugo+x /usr/src/cache/entrypoint.sh && /usr/src/cache/entrypoint.sh
+USER www

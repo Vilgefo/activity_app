@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('route');
             $table->string('ip');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

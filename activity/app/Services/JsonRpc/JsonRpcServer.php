@@ -1,5 +1,5 @@
 <?php
-namespace App\Classes\JsonRpc;
+namespace App\Services\JsonRpc;
 class JsonRpcServer
 {
     public function handle($content, $api)

@@ -4,9 +4,13 @@ services:
   activity:
     build:
       context: './activity'
+      dockerfile: '../Dockerfile'
     volumes:
       - ./activity/public:/var/www/html
       - ./activity/:/var/www/
+    environment:
+      tz: 'Europe/Moscow'
+      project: 'activity'
     ports:
       - "8081:80"
     depends_on:
@@ -16,9 +20,13 @@ services:
   landing:
     build:
       context: './landing'
+      dockerfile: '../Dockerfile'
     volumes:
       - ./landing/public:/var/www/html
       - ./landing/:/var/www/
+    environment:
+      tz: 'Europe/Moscow'
+      project: 'landing'
     ports:
       - "8080:80"
     depends_on:
@@ -32,3 +40,4 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: activity
+      TZ: Europe/Moscow

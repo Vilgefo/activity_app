@@ -1,5 +1,5 @@
 <?php
-namespace App\Classes\JsonRpc;
+namespace App\Services\JsonRpc;
 
 class JsonRpcResponse
 {

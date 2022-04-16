@@ -2,8 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Classes\ActivityManager;
-use App\Helpers\Helpers;
+use App\Services\Activity\ActivityManager;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -25,7 +24,7 @@ class Routes
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->activityManager->save(Helpers::uriWithoutGet());
+        $this->activityManager->saveRouteWithUserIp();
         return $next($request);
     }
 }

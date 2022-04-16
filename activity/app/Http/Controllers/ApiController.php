@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Api\DataApi;
-use App\Classes\JsonRpc\JsonRpcResponse;
-use App\Classes\JsonRpc\JsonRpcServer;
+use App\Services\Api\DataApi;
+use App\Services\JsonRpc\JsonRpcResponse;
+use App\Services\JsonRpc\JsonRpcServer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;

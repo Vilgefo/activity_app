@@ -13,18 +13,21 @@ class RoutesHistory extends Model
 {
     public $timestamps = false;
 
-    public static function boot(){
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->created_at = $model->freshTimestamp();
-        });
-    }
-
     use HasFactory;
 
     protected $table = 'routes_history';
     protected $guarded = [];
 
 
+    public static function createRoute($route, $ip): void
+    {
+        self::create([
+            'route' => $route,
+            'ip' => $ip
+        ]);
+    }
+    public static function getGroupedRoutes(): array
+    {
+        return RoutesHistory::selectRaw('route, ip, COUNT(route) as count, MAX(created_at) as last_ts')->groupBy(['route', 'ip'])->orderByDesc('last_ts')->get()->toArray();
+    }
 }
