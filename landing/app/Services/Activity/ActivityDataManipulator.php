@@ -12,7 +12,7 @@ class ActivityDataManipulator
     {
         $items = array_slice($routes, ($currentPage-1) * $limit, $limit);
         $total = count($routes);
-        return new LengthAwarePaginator($items, $total , $limit, $currentPage);
+        return new LengthAwarePaginator($items, $total , $limit, $currentPage, ['path' => '/admin/activity']);
     }
 
 }

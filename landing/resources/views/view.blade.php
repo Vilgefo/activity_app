@@ -65,5 +65,18 @@
         </div>
 
     </div>
+    <script>
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+        if(!getCookie('tz')){
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.cookie = 'tz='+tz
+            location.reload()
+        }
+    </script>
     </body>
 </html>

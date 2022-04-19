@@ -2,8 +2,10 @@
 
 namespace App\Helpers;
 
+use DateTime;
+use DateTimeZone;
 
-class Helpers
+class IpHelpers
 {
     public static function getRealIp(): string
     {
@@ -15,13 +17,5 @@ class Helpers
             ?? $_SERVER['HTTP_FORWARDED_FOR']
             ?? $_SERVER['REMOTE_ADDR']
             ?? '0.0.0.0';
-    }
-    public static function uriWithoutGet(): string
-    {
-        $url = $_SERVER['REQUEST_URI'];
-        $url = explode('?', $url);
-        $url = $url[0];
-
-        return $url;
     }
 }

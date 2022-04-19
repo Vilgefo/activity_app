@@ -5,13 +5,13 @@ use App\Models\RoutesHistory;
 
 class DataApi
 {
-    public function save($route, $ip): void
+    public function save(string $route, string $ip, string $date): void
     {
-        RoutesHistory::createRoute($route, $ip);
+        RoutesHistory::createRoute($route, $ip, $date);
     }
-    public function show(): array
+    public function show(?string $ip = null): array
     {
-        return RoutesHistory::getGroupedRoutes();
+        return RoutesHistory::getGroupedRoutes($ip);
     }
 }
 

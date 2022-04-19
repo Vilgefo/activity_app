@@ -19,15 +19,21 @@ class RoutesHistory extends Model
     protected $guarded = [];
 
 
-    public static function createRoute($route, $ip): void
+    public static function createRoute(string $route, string $ip, string $date): void
     {
         self::create([
             'route' => $route,
-            'ip' => $ip
+            'ip' => $ip,
+            'created_at' => $date
         ]);
     }
-    public static function getGroupedRoutes(): array
+
+    public static function getGroupedRoutes(?string $ip = null): array
     {
-        return RoutesHistory::selectRaw('route, ip, COUNT(route) as count, MAX(created_at) as last_ts')->groupBy(['route', 'ip'])->orderByDesc('last_ts')->get()->toArray();
+        $builder = RoutesHistory::selectRaw('route, ip, COUNT(route) as count, MAX(created_at) as last_ts')->groupBy(['route', 'ip'])->orderByDesc('last_ts');
+        if($ip){
+            $builder->where(['ip'=>$ip]);
+        }
+        return $builder->get()->toArray();
     }
 }

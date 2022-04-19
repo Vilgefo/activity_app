@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('{route}', [\App\Http\Controllers\SiteController::class, 'show'])->where('route', '.*');
+Route::get('/admin/activity', [\App\Http\Controllers\SiteController::class, 'show'])->where('route', '.*');
+Route::get('{route}', function() {return 'route saved. Go to <a href="/admin/activity">/admin/activity</a>';})->where('route', '.*');
 
 

@@ -14,11 +14,13 @@ class ActivityApi
         $this->client = $client;
     }
 
-    public function save(string $url, string $ip): array{
-        return $this->client->send('save', ['route'=>$url, 'ip'=>$ip]);
+    public function save(string $url, string $ip, string $date): array
+    {
+        return $this->client->send('save', ['route'=>$url, 'ip'=>$ip, 'date' => $date]);
     }
 
-    public function show(): array{
-        return $this->client->send('show');
+    public function show(string $ip): array
+    {
+        return $this->client->send('show', ['ip' => $ip]);
     }
 }

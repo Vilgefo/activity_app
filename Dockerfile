@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip \
     zip \
-    curl
+    curl \
+    default-mysql-client
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 
 # 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
@@ -37,5 +38,5 @@ USER root
 RUN chown -R www:www ./
 WORKDIR /var/www
 RUN chown -R www:www ./
-CMD chmod ugo+x /usr/src/cache/entrypoint.sh && /usr/src/cache/entrypoint.sh
+CMD chmod ugo+x /usr/src/cache/entrypoint.sh && bash /usr/src/cache/entrypoint.sh
 USER www

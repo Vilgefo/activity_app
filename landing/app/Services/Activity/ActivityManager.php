@@ -2,7 +2,9 @@
 
 namespace App\Services\Activity;
 
-use App\Helpers\Helpers;
+use App\Helpers\UrlHelpers;
+use App\Helpers\IpHelpers;
+use App\Helpers\DateHelpers;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /*
@@ -20,9 +22,11 @@ class ActivityManager
 
     public function getRoutesPaginator(int $limit, int $page): LengthAwarePaginator
     {
-        return ActivityDataManipulator::getRoutesPaginator($this->activityApi->show(), $limit, $page);
+        $routes = $this->activityApi->show(IpHelpers::getRealIp());
+        return ActivityDataManipulator::getRoutesPaginator($routes, $limit, $page);
     }
-    public function saveRouteWithUserIp(){
-        $this->activityApi->save(Helpers::uriWithoutGet(), Helpers::getRealIp());
+    public function saveRouteWithUserIp(): void
+    {
+        $this->activityApi->save(UrlHelpers::uriWithoutGet(), IpHelpers::getRealIp(), DateHelpers::getUserDate());
     }
 }
